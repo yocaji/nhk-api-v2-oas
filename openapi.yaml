@@ -1,0 +1,758 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.nhk.or.jp/v2/pg'
+info:
+  description: >-
+    This is a sample server Petstore server. For this sample, you can use the api key
+    `special-key` to test the authorization filters.
+  version: 1.0.0
+  title: NHK API v2
+tags:
+  - name: list
+    description: Finds programs by channel
+  - name: genre
+    description: Finds programs by EPG genre
+  - name: info
+    description: Finds program's detail
+  - name: now
+    description: Finds on air programs
+paths:
+  '/list/{area}/{service}/{date}.json':
+    get:
+      tags:
+        - list
+      summary: Find programs by Channel
+      description: Returns programs
+      operationId: getProgramsByChannel
+      security:
+        - api_key: []
+      parameters:
+        - name: area
+          in: path
+          description: ID of broadcast area
+          required: true
+          schema:
+            type: string
+        - name: service
+          in: path
+          description: ID of channel or channel group
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: path
+          description: Date in YYYY-MM-DD format
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                required:
+                  - "list"
+                properties:
+                  list:
+                    required:
+                      - "g1"
+                    properties:
+                      g1:
+                        type: "array"
+                        items:
+                          type: "object"
+                          properties:
+                            id:
+                              type: "string"
+                            event_id:
+                              type: "string"
+                            start_time:
+                              type: "string"
+                            end_time:
+                              type: "string"
+                            area:
+                              required:
+                                - "id"
+                                - "name"
+                              properties:
+                                id:
+                                  type: "string"
+                                name:
+                                  type: "string"
+                              type: "object"
+                            service:
+                              required:
+                                - "id"
+                                - "name"
+                                - "logo_s"
+                                - "logo_m"
+                                - "logo_l"
+                              properties:
+                                id:
+                                  type: "string"
+                                name:
+                                  type: "string"
+                                logo_s:
+                                  required:
+                                    - "url"
+                                    - "width"
+                                    - "height"
+                                  properties:
+                                    url:
+                                      type: "string"
+                                    width:
+                                      type: "string"
+                                    height:
+                                      type: "string"
+                                  type: "object"
+                                logo_m:
+                                  required:
+                                    - "url"
+                                    - "width"
+                                    - "height"
+                                  properties:
+                                    url:
+                                      type: "string"
+                                    width:
+                                      type: "string"
+                                    height:
+                                      type: "string"
+                                  type: "object"
+                                logo_l:
+                                  required:
+                                    - "url"
+                                    - "width"
+                                    - "height"
+                                  properties:
+                                    url:
+                                      type: "string"
+                                    width:
+                                      type: "string"
+                                    height:
+                                      type: "string"
+                                  type: "object"
+                              type: "object"
+                            title:
+                              type: "string"
+                            subtitle:
+                              type: "string"
+                            content:
+                              type: "string"
+                            act:
+                              type: "string"
+                            genres:
+                              type: "array"
+                              items:
+                                type: "string"
+                    type: "object"
+        '400':
+          description: Invalid parameter(s) supplied
+        '404':
+          description: Programs not found
+  '/genre/{area}/{service}/{genre}/{date}.json':
+    get:
+      tags:
+        - genre
+      summary: Find programs by Channel
+      description: Returns programs
+      operationId: getProgramsByGenre
+      security:
+        - api_key: []
+      parameters:
+        - name: area
+          in: path
+          description: ID of broadcast area
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: service
+          in: path
+          description: ID of channel or channel group
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: path
+          description: Date in YYYY-MM-DD format
+          required: true
+          schema:
+            type: string
+        - name: genre
+          in: path
+          description: 何か書く
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                required:
+                  - "list"
+                properties:
+                  list:
+                    required:
+                      - "g1"
+                    properties:
+                      g1:
+                        type: "array"
+                        items:
+                          type: "object"
+                          properties:
+                            id:
+                              type: "string"
+                            event_id:
+                              type: "string"
+                            start_time:
+                              type: "string"
+                            end_time:
+                              type: "string"
+                            area:
+                              required:
+                                - "id"
+                                - "name"
+                              properties:
+                                id:
+                                  type: "string"
+                                name:
+                                  type: "string"
+                              type: "object"
+                            service:
+                              required:
+                                - "id"
+                                - "name"
+                                - "logo_s"
+                                - "logo_m"
+                                - "logo_l"
+                              properties:
+                                id:
+                                  type: "string"
+                                name:
+                                  type: "string"
+                                logo_s:
+                                  required:
+                                    - "url"
+                                    - "width"
+                                    - "height"
+                                  properties:
+                                    url:
+                                      type: "string"
+                                    width:
+                                      type: "string"
+                                    height:
+                                      type: "string"
+                                  type: "object"
+                                logo_m:
+                                  required:
+                                    - "url"
+                                    - "width"
+                                    - "height"
+                                  properties:
+                                    url:
+                                      type: "string"
+                                    width:
+                                      type: "string"
+                                    height:
+                                      type: "string"
+                                  type: "object"
+                                logo_l:
+                                  required:
+                                    - "url"
+                                    - "width"
+                                    - "height"
+                                  properties:
+                                    url:
+                                      type: "string"
+                                    width:
+                                      type: "string"
+                                    height:
+                                      type: "string"
+                                  type: "object"
+                              type: "object"
+                            title:
+                              type: "string"
+                            subtitle:
+                              type: "string"
+                            content:
+                              type: "string"
+                            act:
+                              type: "string"
+                            genres:
+                              type: "array"
+                              items:
+                                type: "string"
+                    type: "object"
+  '/info/{area}/{service}/{id}.json':
+    get:
+      tags:
+        - info
+      summary: Find programs by Channel
+      description: Returns programs
+      operationId: getProgramInfo
+      security:
+        - api_key: []
+      parameters:
+        - name: area
+          in: path
+          description: ID of broadcast area
+          required: true
+          schema:
+            type: string
+        - name: service
+          in: path
+          description: ID of channel or channel group
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: 番組ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                required:
+                  - "list"
+                properties:
+                  list:
+                    required:
+                      - "g1"
+                    properties:
+                      g1:
+                        type: "array"
+                        items:
+                          type: "object"
+                          properties:
+                            id:
+                              type: "string"
+                            event_id:
+                              type: "string"
+                            start_time:
+                              type: "string"
+                            end_time:
+                              type: "string"
+                            area:
+                              required:
+                                - "id"
+                                - "name"
+                              properties:
+                                id:
+                                  type: "string"
+                                name:
+                                  type: "string"
+                              type: "object"
+                            service:
+                              required:
+                                - "id"
+                                - "name"
+                                - "logo_s"
+                                - "logo_m"
+                                - "logo_l"
+                              properties:
+                                id:
+                                  type: "string"
+                                name:
+                                  type: "string"
+                                logo_s:
+                                  required:
+                                    - "url"
+                                    - "width"
+                                    - "height"
+                                  properties:
+                                    url:
+                                      type: "string"
+                                    width:
+                                      type: "string"
+                                    height:
+                                      type: "string"
+                                  type: "object"
+                                logo_m:
+                                  required:
+                                    - "url"
+                                    - "width"
+                                    - "height"
+                                  properties:
+                                    url:
+                                      type: "string"
+                                    width:
+                                      type: "string"
+                                    height:
+                                      type: "string"
+                                  type: "object"
+                                logo_l:
+                                  required:
+                                    - "url"
+                                    - "width"
+                                    - "height"
+                                  properties:
+                                    url:
+                                      type: "string"
+                                    width:
+                                      type: "string"
+                                    height:
+                                      type: "string"
+                                  type: "object"
+                              type: "object"
+                            title:
+                              type: "string"
+                            subtitle:
+                              type: "string"
+                            content:
+                              type: "string"
+                            act:
+                              type: "string"
+                            genres:
+                              type: "array"
+                              items:
+                                type: "string"
+                            program_logo:
+                              required:
+                                - "url"
+                                - "width"
+                                - "height"
+                              properties:
+                                url:
+                                  type: "string"
+                                width:
+                                  type: "string"
+                                height:
+                                  type: "string"
+                              type: "object"
+                            program_url:
+                              type: "string"
+                            hashtags:
+                              type: "array"
+                              items:
+                                type: "string"
+                    type: "object"
+  '/now/{area}/{service}.json':
+    get:
+      tags:
+        - now
+      summary: Find programs by Channel
+      description: Returns programs
+      operationId: getProgramsNowOnAir
+      security:
+        - api_key: []
+      parameters:
+        - name: area
+          in: path
+          description: ID of broadcast area
+          required: true
+          schema:
+            type: string
+        - name: service
+          in: path
+          description: ID of channel or channel group
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                required:
+                  - "nowonair_list"
+                properties:
+                  nowonair_list:
+                    required:
+                      - "g1"
+                    properties:
+                      g1:
+                        required:
+                          - "previous"
+                          - "present"
+                          - "following"
+                        properties:
+                          previous:
+                            required:
+                              - "id"
+                              - "event_id"
+                              - "start_time"
+                              - "end_time"
+                              - "area"
+                              - "service"
+                              - "title"
+                              - "subtitle"
+                              - "genres"
+                            properties:
+                              id:
+                                type: "string"
+                              event_id:
+                                type: "string"
+                              start_time:
+                                type: "string"
+                              end_time:
+                                type: "string"
+                              area:
+                                required:
+                                  - "id"
+                                  - "name"
+                                properties:
+                                  id:
+                                    type: "string"
+                                  name:
+                                    type: "string"
+                                type: "object"
+                              service:
+                                required:
+                                  - "id"
+                                  - "name"
+                                  - "logo_s"
+                                  - "logo_m"
+                                  - "logo_l"
+                                properties:
+                                  id:
+                                    type: "string"
+                                  name:
+                                    type: "string"
+                                  logo_s:
+                                    required:
+                                      - "url"
+                                      - "width"
+                                      - "height"
+                                    properties:
+                                      url:
+                                        type: "string"
+                                      width:
+                                        type: "string"
+                                      height:
+                                        type: "string"
+                                    type: "object"
+                                  logo_m:
+                                    required:
+                                      - "url"
+                                      - "width"
+                                      - "height"
+                                    properties:
+                                      url:
+                                        type: "string"
+                                      width:
+                                        type: "string"
+                                      height:
+                                        type: "string"
+                                    type: "object"
+                                  logo_l:
+                                    required:
+                                      - "url"
+                                      - "width"
+                                      - "height"
+                                    properties:
+                                      url:
+                                        type: "string"
+                                      width:
+                                        type: "string"
+                                      height:
+                                        type: "string"
+                                    type: "object"
+                                type: "object"
+                              title:
+                                type: "string"
+                              subtitle:
+                                type: "string"
+                              genres:
+                                type: "array"
+                                items:
+                                  type: "string"
+                            type: "object"
+                          present:
+                            required:
+                              - "id"
+                              - "event_id"
+                              - "start_time"
+                              - "end_time"
+                              - "area"
+                              - "service"
+                              - "title"
+                              - "subtitle"
+                              - "genres"
+                            properties:
+                              id:
+                                type: "string"
+                              event_id:
+                                type: "string"
+                              start_time:
+                                type: "string"
+                              end_time:
+                                type: "string"
+                              area:
+                                required:
+                                  - "id"
+                                  - "name"
+                                properties:
+                                  id:
+                                    type: "string"
+                                  name:
+                                    type: "string"
+                                type: "object"
+                              service:
+                                required:
+                                  - "id"
+                                  - "name"
+                                  - "logo_s"
+                                  - "logo_m"
+                                  - "logo_l"
+                                properties:
+                                  id:
+                                    type: "string"
+                                  name:
+                                    type: "string"
+                                  logo_s:
+                                    required:
+                                      - "url"
+                                      - "width"
+                                      - "height"
+                                    properties:
+                                      url:
+                                        type: "string"
+                                      width:
+                                        type: "string"
+                                      height:
+                                        type: "string"
+                                    type: "object"
+                                  logo_m:
+                                    required:
+                                      - "url"
+                                      - "width"
+                                      - "height"
+                                    properties:
+                                      url:
+                                        type: "string"
+                                      width:
+                                        type: "string"
+                                      height:
+                                        type: "string"
+                                    type: "object"
+                                  logo_l:
+                                    required:
+                                      - "url"
+                                      - "width"
+                                      - "height"
+                                    properties:
+                                      url:
+                                        type: "string"
+                                      width:
+                                        type: "string"
+                                      height:
+                                        type: "string"
+                                    type: "object"
+                                type: "object"
+                              title:
+                                type: "string"
+                              subtitle:
+                                type: "string"
+                              genres:
+                                type: "array"
+                                items:
+                                  type: "string"
+                            type: "object"
+                          following:
+                            required:
+                              - "id"
+                              - "event_id"
+                              - "start_time"
+                              - "end_time"
+                              - "area"
+                              - "service"
+                              - "title"
+                              - "subtitle"
+                              - "genres"
+                            properties:
+                              id:
+                                type: "string"
+                              event_id:
+                                type: "string"
+                              start_time:
+                                type: "string"
+                              end_time:
+                                type: "string"
+                              area:
+                                required:
+                                  - "id"
+                                  - "name"
+                                properties:
+                                  id:
+                                    type: "string"
+                                  name:
+                                    type: "string"
+                                type: "object"
+                              service:
+                                required:
+                                  - "id"
+                                  - "name"
+                                  - "logo_s"
+                                  - "logo_m"
+                                  - "logo_l"
+                                properties:
+                                  id:
+                                    type: "string"
+                                  name:
+                                    type: "string"
+                                  logo_s:
+                                    required:
+                                      - "url"
+                                      - "width"
+                                      - "height"
+                                    properties:
+                                      url:
+                                        type: "string"
+                                      width:
+                                        type: "string"
+                                      height:
+                                        type: "string"
+                                    type: "object"
+                                  logo_m:
+                                    required:
+                                      - "url"
+                                      - "width"
+                                      - "height"
+                                    properties:
+                                      url:
+                                        type: "string"
+                                      width:
+                                        type: "string"
+                                      height:
+                                        type: "string"
+                                    type: "object"
+                                  logo_l:
+                                    required:
+                                      - "url"
+                                      - "width"
+                                      - "height"
+                                    properties:
+                                      url:
+                                        type: "string"
+                                      width:
+                                        type: "string"
+                                      height:
+                                        type: "string"
+                                    type: "object"
+                                type: "object"
+                              title:
+                                type: "string"
+                              subtitle:
+                                type: "string"
+                              genres:
+                                type: "array"
+                                items:
+                                  type: "string"
+                            type: "object"
+                        type: "object"
+                    type: "object"
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: key
+      in: query

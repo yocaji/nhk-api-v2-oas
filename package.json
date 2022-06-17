@@ -1,5 +1,15 @@
 {
+  "name": "nhk-api-v2",
+  "version": "1.0.0",
+  "scripts": {
+    "generate-client": "openapi-generator-cli generate -g javascript -i ./openapi.yaml -o ../nhk-api-v2",
+    "test": "mocha"
+  },
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.5.1"
+    "@openapitools/openapi-generator-cli": "^2.5.1",
+    "mocha": "^10.0.0"
+  },
+  "dependencies": {
+    "nhk_api_v2": "file:../nhk-api-v2"
   }
 }
