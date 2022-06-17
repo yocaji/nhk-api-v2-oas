@@ -3,7 +3,7 @@ servers:
   - url: 'https://api.nhk.or.jp/v2/pg'
 info:
   description: >-
-    これは[NHK番組表API](https://api-portal.nhk.or.jp/)のAPIクライアントです。
+    [NHK Program API](https://api-portal.nhk.or.jp/)
   version: 1.0.0
   title: NHK API v2
 tags:
@@ -40,15 +40,53 @@ paths:
             type: string
       responses:
         '200':
-          description: successful operation
+          description: Successful operation.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/List'
+        '304':
+          description: The resource has not been updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '400':
-          description: Invalid parameter(s) supplied
+          description: The parameter does not match what was expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not allowed access to the resource or you have exceeded the usage limits.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
-          description: Programs not found
+          description: The requested resource cannot be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Unable to return data due to internal problem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Unable to return data due to internal problem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   '/genre/{area}/{service}/{genre}/{date}.json':
     get:
       tags:
@@ -91,6 +129,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/List'
+        '304':
+          description: The resource has not been updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: The parameter does not match what was expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not allowed access to the resource or you have exceeded the usage limits.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The requested resource cannot be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Unable to return data due to internal problem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Unable to return data due to internal problem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   '/info/{area}/{service}/{id}.json':
     get:
       tags:
@@ -126,6 +206,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DescriptionList'
+        '304':
+          description: The resource has not been updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: The parameter does not match what was expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not allowed access to the resource or you have exceeded the usage limits.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The requested resource cannot be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Unable to return data due to internal problem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Unable to return data due to internal problem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   '/now/{area}/{service}.json':
     get:
       tags:
@@ -175,6 +297,48 @@ paths:
                             $ref: '#/components/schemas/Program'
                           following:
                             $ref: '#/components/schemas/Program'
+        '304':
+          description: The resource has not been updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: The parameter does not match what was expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not allowed access to the resource or you have exceeded the usage limits.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The requested resource cannot be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Unable to return data due to internal problem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: Unable to return data due to internal problem.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     api_key:
@@ -492,3 +656,18 @@ components:
           type: "string"
         id:
           type: "string"
+    Error:
+      type: "object"
+      required:
+        - "error"
+      properties:
+        error:
+          type: "object"
+          required:
+            - "code"
+            - "message"
+          properties:
+            code:
+              type: "number"
+            message:
+              type: "string"
