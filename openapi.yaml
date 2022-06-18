@@ -3,7 +3,7 @@ servers:
   - url: 'https://api.nhk.or.jp/v2/pg'
 info:
   description: >-
-    [NHK Program Guide API](https://api-portal.nhk.or.jp/)
+    A JavaScript client for NHK Program Guide API.
   version: 1.0.0
   title: NHK API v2
 tags:
@@ -13,7 +13,7 @@ paths:
     get:
       tags:
         - programs
-      operationId: getProgramsByChannel
+      operationId: getPrograms
       security:
         - api_key: []
       parameters:
@@ -266,27 +266,7 @@ paths:
           content:
             application/json:
               schema:
-                required:
-                  - "nowonair_list"
-                properties:
-                  nowonair_list:
-                    type: "object"
-                    required:
-                      - "g1"
-                    properties:
-                      g1:
-                        type: "object"
-                        required:
-                          - "previous"
-                          - "present"
-                          - "following"
-                        properties:
-                          previous:
-                            $ref: '#/components/schemas/Program'
-                          present:
-                            $ref: '#/components/schemas/Program'
-                          following:
-                            $ref: '#/components/schemas/Program'
+                $ref: '#/components/schemas/NowOnAirList'
         '304':
           description: The resource has not been updated.
           content:
@@ -504,6 +484,65 @@ components:
               type: "array"
               items:
                 $ref: '#/components/schemas/Description'
+    NowOnAirList:
+      type: object
+      required:
+        - "nowonair_list"
+      properties:
+        nowonair_list:
+          type: "object"
+          properties:
+            g1:
+              $ref: '#/components/schemas/NowOnAir'
+            g2:
+              $ref: '#/components/schemas/Program'
+            e1:
+              $ref: '#/components/schemas/Program'
+            e2:
+              $ref: '#/components/schemas/Program'
+            e3:
+              $ref: '#/components/schemas/Program'
+            e4:
+              $ref: '#/components/schemas/Program'
+            s1:
+              $ref: '#/components/schemas/Program'
+            s2:
+              $ref: '#/components/schemas/Program'
+            s3:
+              $ref: '#/components/schemas/Program'
+            s4:
+              $ref: '#/components/schemas/Program'
+            r1:
+              $ref: '#/components/schemas/Program'
+            r2:
+              $ref: '#/components/schemas/Program'
+            r3:
+              $ref: '#/components/schemas/Program'
+            n1:
+              $ref: '#/components/schemas/Program'
+            n2:
+              $ref: '#/components/schemas/Program'
+            n3:
+              $ref: '#/components/schemas/Program'
+            tv:
+              $ref: '#/components/schemas/Program'
+            radio:
+              $ref: '#/components/schemas/Program'
+            netradio:
+              $ref: '#/components/schemas/Program'
+    NowOnAir:
+      type: "object"
+      required:
+        - "previous"
+        - "present"
+        - "following"
+      properties:
+        previous:
+          $ref: '#/components/schemas/Program'
+        present:
+          $ref: '#/components/schemas/Program'
+        following:
+          $ref: '#/components/schemas/Program'
     Program:
       type: object
       required:
