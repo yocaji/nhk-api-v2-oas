@@ -1,0 +1,7 @@
+{
+  "projectName": "nhk-api-v2",
+  "moduleName": "NhkApiV2",
+  "licenseName": "MIT",
+  "projectVersion": "1.0.0",
+  "usePromises": true
+}
