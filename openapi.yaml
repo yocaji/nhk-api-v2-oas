@@ -3,19 +3,16 @@ servers:
   - url: 'https://api.nhk.or.jp/v2/pg'
 info:
   description: >-
-    [NHK Program API](https://api-portal.nhk.or.jp/)
+    [NHK Program Guide API](https://api-portal.nhk.or.jp/)
   version: 1.0.0
   title: NHK API v2
 tags:
   - name: programs
-    description: Finds programs
 paths:
   '/list/{area}/{service}/{date}.json':
     get:
       tags:
         - programs
-      summary: Find programs by Channel
-      description: Returns programs
       operationId: getProgramsByChannel
       security:
         - api_key: []
@@ -91,8 +88,6 @@ paths:
     get:
       tags:
         - programs
-      summary: Find programs by Channel
-      description: Returns programs
       operationId: getProgramsByGenre
       security:
         - api_key: []
@@ -102,8 +97,7 @@ paths:
           description: ID of broadcast area
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
         - name: service
           in: path
           description: ID of channel or channel group
@@ -118,7 +112,7 @@ paths:
             type: string
         - name: genre
           in: path
-          description: 何か書く
+          description: Genre code defined by ARIB STD-B10
           required: true
           schema:
             type: string
@@ -175,8 +169,6 @@ paths:
     get:
       tags:
         - programs
-      summary: Find programs by Channel
-      description: Returns programs
       operationId: getProgramInfo
       security:
         - api_key: []
@@ -195,7 +187,7 @@ paths:
             type: string
         - name: id
           in: path
-          description: 番組ID
+          description: ID of program
           required: true
           schema:
             type: string
@@ -252,8 +244,6 @@ paths:
     get:
       tags:
         - programs
-      summary: Find programs by Channel
-      description: Returns programs
       operationId: getProgramsNowOnAir
       security:
         - api_key: []
