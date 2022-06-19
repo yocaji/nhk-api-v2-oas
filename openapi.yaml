@@ -4,7 +4,7 @@ servers:
 info:
   description: >-
     A JavaScript client for NHK Program Guide API.
-  version: 1.0.0
+  version: 2.0.0
   title: NHK API v2
 tags:
   - name: programs
@@ -495,41 +495,41 @@ components:
             g1:
               $ref: '#/components/schemas/NowOnAir'
             g2:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             e1:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             e2:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             e3:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             e4:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             s1:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             s2:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             s3:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             s4:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             r1:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             r2:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             r3:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             n1:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             n2:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             n3:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             tv:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             radio:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
             netradio:
-              $ref: '#/components/schemas/Program'
+              $ref: '#/components/schemas/NowOnAir'
     NowOnAir:
       type: "object"
       required:

@@ -10,6 +10,7 @@
     "standard": "^17.0.0"
   },
   "dependencies": {
+    "dotenv": "^16.0.1",
     "nhk-api-v2": "file:../nhk-api-v2"
   }
 }
